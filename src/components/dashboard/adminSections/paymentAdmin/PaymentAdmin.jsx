@@ -1,14 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { XMarkIcon, PencilIcon } from "@heroicons/react/24/outline";
 import AdminEditeOrder from "../../adminHelpers/AdminEditeOrder";
 import AdminBackDrop from "@/components/helpers/AdminBackDrop";
 import axios from "axios";
 
-export default function PaymentAdmin({ orderData }) {
+export default function PaymentAdmin() {
+  const [orderData, setOrderData] = useState([]);
   const [popUp, setPopup] = useState(false);
   const [currentId, setCurrentId] = useState("");
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const { data } = await axios.get(`${process.env.API_URL}/api/orders`);
+      setOrderData(data);
+    };
+    fetchOrders();
+  }, []);
 
   const handelOpen = (_id) => {
     setPopup(true);

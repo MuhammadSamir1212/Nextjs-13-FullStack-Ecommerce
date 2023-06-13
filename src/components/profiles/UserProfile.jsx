@@ -1,16 +1,26 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import UpdateUserProfile from "./UpdateUserProfile";
 import ProfileHistory from "./ProfileHistory";
 import AdminBackDrop from "../helpers/AdminBackDrop";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
+import axios from "axios";
 
-export default function UserProfile({ userData }) {
+export default function UserProfile() {
+  const [userData, setUserData] = useState([]);
   const [popUp, setPopup] = useState(false);
 
   //next auth
   const { data: session } = useSession();
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const { data } = await axios.get(`${process.env.API_URL}/api/users`);
+      setUserData(data);
+    };
+    fetchOrders();
+  }, []);
 
   const handelOpen = (_id) => {
     setPopup(true);

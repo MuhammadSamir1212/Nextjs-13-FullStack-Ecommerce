@@ -9,22 +9,7 @@ export const metadata = {
   description: "The React Framework for the Web",
 };
 
-// Get Data
-async function getUserData() {
-  const res = await fetch(`${process.env.API_URL}/api/users`, {
-    cache: "no-store",
-  });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
-
-export default async function ProfilePage() {
-  const userData = await getUserData();
-
+export default function ProfilePage() {
   return (
     <>
       <div className="bg-[url(/contact-home.jpg)] bg-center bg-cover bg-no-repeat h-[280px]">
@@ -44,7 +29,7 @@ export default async function ProfilePage() {
         </Link>
       </div>
       <div className="sm:px-16 px-6 pt-[2em] w-full h-full">
-        <UserProfile userData={userData} />
+        <UserProfile />
       </div>
     </>
   );

@@ -1,11 +1,12 @@
 "use client";
 //general
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { addCart } from "@/redux/Slices/cartSlice";
+import axios from "axios";
 
 //icons
 import {
@@ -13,10 +14,19 @@ import {
   ArrowsUpDownIcon,
 } from "@heroicons/react/24/outline";
 
-export default function ShopProducts({ productsData }) {
+export default function ShopProducts() {
+  const [productsData, setProductsData] = useState([]);
   //filter
   const [openFilter, setOpenFilter] = useState(false);
   const [filterItem, setFilterItem] = useState("all");
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const { data } = await axios.get(`${process.env.API_URL}/api/products`);
+      setProductsData(data);
+    };
+    fetchOrders();
+  }, []);
 
   const habdelOpenFilter = () => {
     setOpenFilter(!openFilter);

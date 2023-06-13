@@ -1,14 +1,23 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { XMarkIcon, PencilIcon } from "@heroicons/react/24/outline";
 import AdminEditeUser from "../../adminHelpers/AdminEditeUser";
 import AdminBackDrop from "@/components/helpers/AdminBackDrop";
 import axios from "axios";
 
-export default function UserAdmin({ userData }) {
+export default function UserAdmin() {
+  const [userData, setUserData] = useState([]);
   const [popUp, setPopup] = useState(false);
   const [currentId, setCurrentId] = useState("");
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const { data } = await axios.get(`${process.env.API_URL}/api/users`);
+      setUserData(data);
+    };
+    fetchOrders();
+  }, []);
 
   const handelOpen = (_id) => {
     setPopup(true);

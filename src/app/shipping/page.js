@@ -8,12 +8,6 @@ import ShippingForm from "@/components/forms/ShippingForm";
 //icons
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 
-//metaData
-export const metadata = {
-  title: "Shipping Info",
-  description: "The React Framework for the Web",
-};
-
 export default function ShippingScreen() {
   const router = useRouter();
 

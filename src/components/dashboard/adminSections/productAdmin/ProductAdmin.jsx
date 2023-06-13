@@ -1,15 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 import { XMarkIcon, PencilIcon } from "@heroicons/react/24/outline";
 import AdminProductForm from "../../adminHelpers/AdminProductForm";
 import axios from "axios";
 
-export default function ProductAdmin({ productsData }) {
+export default function ProductAdmin() {
+  const [productsData, setProductsData] = useState([]);
   const [currentId, setCurrentId] = useState("");
   const [openForm, setOpenForm] = useState(false);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const { data } = await axios.get(`${process.env.API_URL}/api/products`);
+      setProductsData(data);
+    };
+    fetchOrders();
+  }, []);
 
   const handleOpenForm = (_id) => {
     setOpenForm(!openForm);
