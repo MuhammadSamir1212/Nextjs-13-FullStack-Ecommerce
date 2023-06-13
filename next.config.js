@@ -1,11 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
-    API_URL: "http://localhost:3000",
+    API_URL: "https://nextjs-13-full-stack-ecommerce.vercel.app/",
     MONGODB_URI:
       "mongodb+srv://muhammad:H6lXIHKl53hR0p9K@cluster0.k6foovo.mongodb.net/next13-ecommarce?retryWrites=true&w=majority",
     NEXTAUTH_SECRET: "msaprogramming",
-    NEXTAUTH_URL: "http://localhost:3000",
+    NEXTAUTH_URL: "https://nextjs-13-full-stack-ecommerce.vercel.app/",
     CLOUDINARY_URL:
       "https://api.cloudinary.com/v1_1/msa-programing/image/upload",
     CLOUDINARY_PRESET: "msa-programming",
