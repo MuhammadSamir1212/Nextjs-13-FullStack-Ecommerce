@@ -10,7 +10,7 @@ export function PayPalProvider({ children }) {
   };
 
   return (
-    <PayPalScriptProvider deferLoading={true} options={initialOptions}>
+    <PayPalScriptProvider options={initialOptions}>
       {children}
     </PayPalScriptProvider>
   );
